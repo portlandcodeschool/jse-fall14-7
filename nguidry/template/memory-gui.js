@@ -1,13 +1,11 @@
 var MemoryGUI = (function () {
-
-	function prepareForClicks(elem,x,y) {
-		if (!elem) return;
-		elem.addEventListener("click",function(){clickFn();});
-	}
-
-	var gridSize = Math.ceil(Math.sqrt(len));
-
+	
 	function GUI(len,clickFn,resetGameFn) {
+
+		function prepareForClicks(elem,x,y) {
+			if (!elem) return;
+			elem.addEventListener("click",function(){clickFn();});
+		}
 
 		// public methods:
 		this.reset = function() {
@@ -25,36 +23,48 @@ var MemoryGUI = (function () {
 			whereArr.classList.add('face-down');
 		};
     
-		setTimeout(removeSoon, 500);
+		setTimeout(this.removeSoon, 500);
 
 		this.hideSoon = function(whereArr) {
 			whereArr.classList.add('matched');
 		};
     
-		setTimeout(hideSoon, 500);
-
+		setTimeout(this.hideSoon, 500);
 
 		//table generator here:
-		var table = document.createElement('table');
-		table.setAttribute('id','memorygame');
 
-		var tr, td;
-// ** replace '5' with 'grideSize'
-		for (var row = 0; row<5; row++) {
-			tr = document.createElement('tr');
-			table.appendChild(tr);
-// ** replace '5' with 'grideSize'
-			for (var col = 0; col<5; col++) {
-				td = document.createElement('td');
-				td.id = 'row'+row+'col'+col;
+		function makeTable(len) {
+			var table = document.createElement('table');
+			table.setAttribute('id','gameBoard');
 
-				prepareForClicks(td,col,row);
-				tr.appendChild(td);
-				td.classList.add('face-down');
+			var tr, 
+				td, 
+				gridSize = Math.ceil(Math.sqrt(len));
 
+			for (var row = 0; row<5; row++) {
+
+				tr = document.createElement('tr');
+				table.appendChild(tr);
+
+				for (var col = 0; col<5; col++) {
+
+					td = document.createElement('td');
+					td.id = 'row'+row+'col'+col;
+
+					prepareForClicks(td,col,row);
+					tr.appendChild(td);
+					td.classList.add('face-down');
+				}
 			}
+
+			return table;
+		
 		}
-		document.body.appendChild(table);
+
+	var table = makeTable(len);
+
+	document.getElementById("memorygame").appendChild(table);
+
 	}
 
 	this.reset = reset;

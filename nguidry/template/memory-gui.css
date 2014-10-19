@@ -8,6 +8,11 @@
 	border: 4px solid white;
 }
 
+#gameBoard td {
+	width:30px;
+	height:30px;
+}
+
 .face-down {
 	background: red;
 }

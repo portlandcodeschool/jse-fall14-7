@@ -1,70 +1,66 @@
 var MemoryGUI = (function () {
-	
-	function GUI(len,clickFn,resetGameFn) {
 
-		function prepareForClicks(elem,x,y) {
-			if (!elem) return;
-			elem.addEventListener("click",function(){clickFn();});
+	function prepareForClicks(elem,clickFn,row,col) {
+		if (!elem) return;
+		elem.addEventListener("click",function(){clickFn(row,col);});
+	}
+
+	function rowColToId(row,col) {
+		return 'row'+row+'col'+col;
+	}
+
+	function makeTable(len) {
+		var table = document.createElement('table');
+		table.setAttribute('id','gameBoard');
+
+		var tr, 
+			td,
+			side = Math.ceil(Math.sqrt(len));
+
+		for (var row = 0; row<side; row++) {
+			tr = document.createElement('tr');
+			table.appendChild(tr);
+			for (var col = 0; col<side; col++) {
+				td = document.createElement('td');
+				td.id = rowColToId(col,row);
+
+				prepareForClicks(td,col,row);
+				tr.appendChild(td);
+			}
 		}
+		return table;
+	}
+
+	function GUI(len,clickFn,resetGameFn) {
+		var table = makeTable(len);
+		document.getElementById("memorygame").appendChild(table);
+
+		this.board = table; //???
+
+		// this.drawChecker = function(row,col,drawFn) {
+		// 	var sqr = document.getElementById(rowColToId(row,col));
+		// 	return (sqr && drawFn(sqr));
 
 		// public methods:
 		this.reset = function() {
 			//...
-		};
-
-		this.show = function(where,value) {
+		}
+		this.show = function(where,what) {
 			//probably not td...
-			td[where].classList.add('face-up');
+			//td[where].classList.add('face-up');
 			//**The display value of that card (according to 
 			//the game model) will be provided as parameter value.
-		};
-
+		}
 		this.removeSoon = function(whereArr) {
-			whereArr.classList.add('face-down');
-		};
-    
-		setTimeout(this.removeSoon, 500);
-
-		this.hideSoon = function(whereArr) {
-			whereArr.classList.add('matched');
-		};
-    
-		setTimeout(this.hideSoon, 500);
-
-		//table generator here:
-
-		function makeTable(len) {
-			var table = document.createElement('table');
-			table.setAttribute('id','gameBoard');
-
-			var tr, 
-				td, 
-				gridSize = Math.ceil(Math.sqrt(len));
-
-			for (var row = 0; row<5; row++) {
-
-				tr = document.createElement('tr');
-				table.appendChild(tr);
-
-				for (var col = 0; col<5; col++) {
-
-					td = document.createElement('td');
-					td.id = 'row'+row+'col'+col;
-
-					prepareForClicks(td,col,row);
-					tr.appendChild(td);
-					td.classList.add('face-down');
-				}
-			}
-
-			return table;
-		
+			//whereArr.classList.add('face-down');
 		}
 
-	var table = makeTable(len);
+		this.hideSoon = function(whereArr) {
+			//whereArr.classList.add('matched');
+		}
 
-	document.getElementById("memorygame").appendChild(table);
-
+		//setTimeout(this.removeSoon, 500);
+		//setTimeout(this.hideSoon, 500);
 	}
 
 	this.reset = reset;

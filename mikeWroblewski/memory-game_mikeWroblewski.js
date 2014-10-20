@@ -14,7 +14,7 @@ var MemoryGame = (function() {
 		// ==== Reset Cards Array =====
 		// ============================				
 		this.reset = function() {
-			board = values.slice();
+			board = cardset.values.slice();
 			// RESHUFFLE!
 			var m = board.length, t, i;
 			while (m) {
@@ -61,6 +61,7 @@ var MemoryGame = (function() {
 
 			if (faceupArr[0] === undefined) { // if no other card has been lifted
 				faceupArr = board.slice(where,where+1); // place the first lifted card into a seperate array for comparison
+				console.log(faceupArr[0]);
 				if (displayCard === null) { // if no displayCard is given
 					return board[where]; // return lifted card
 				} else {

@@ -16,10 +16,8 @@ var MemoryGUI = (function () {
 		var clickFunc = function(td) {
 			td.addEventListener('click',function(evt){
 
-				MemoryGame.lift;
+				game.lift(td.id); // calls lift function from MemoryGame module
 				
-
-				console.log(td.id);
 			});
 		}
 
@@ -59,10 +57,9 @@ var MemoryGUI = (function () {
 
 		resetButton.addEventListener('click', function(evt) {
 			
-			// resetGameFn();
+			game.reset();
 			// now reset GUI, too
 
-			console.log("RESET!");
 		});
 		
 

@@ -1,0 +1,28 @@
+/* CSS for GUI...*/
+
+#memorygame .newrow{
+
+}
+
+#memorygame div.facedown {
+	width: 60px;
+	height: 75px;
+	border: 1px solid black;
+	background: purple;
+	margin: 10px;
+	border-radius: 5px;
+}
+
+#memorygame div.faceup {
+	width: 60px;
+	height: 75px;
+	border: 1px solid black;
+	background: purple;
+	margin: 10px;
+	border-radius: 5px;
+}
+
+#memorygame div.matched {
+	visibility: hidden;
+}
+

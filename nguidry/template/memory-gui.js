@@ -1,5 +1,6 @@
 var MemoryGUI = (function () {
 
+
 	function prepareForClicks(elem,clickFn,row,col) {
 		if (!elem) return;
 		elem.addEventListener("click",function(){clickFn(row,col);});

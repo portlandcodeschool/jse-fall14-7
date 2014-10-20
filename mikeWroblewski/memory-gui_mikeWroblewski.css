@@ -1,0 +1,47 @@
+/* CSS for GUI...*/
+
+/*
+=== Game Board ===
+==================
+*/
+
+#memorygame {
+	display:inline-block;
+	margin: 0 auto;
+	empty-cells:show;
+	border-spacing:2px;
+	text-align:center;
+	font-size:20pt;
+}
+
+#gametable .newrow {
+	clear:;
+}
+
+#gametable td.facedown, .resetgame {
+	width:40px;
+	height:40px;
+	border:1px solid black;
+	background:blue;
+}
+
+#gametable td.faceup {
+	background:none;
+	border:none;
+}
+
+#gametable td.matched {
+	background:red;
+}
+
+/*
+=== Reset Button ===
+====================
+*/
+
+#resetbutton::before {
+	display: inline-block;
+	margin: 0 auto;
+	text-align:center;
+}
+

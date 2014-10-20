@@ -1,0 +1,14 @@
+/* CSS for GUI...*/
+
+#memorygame .newrow {
+
+}
+
+#memorygame div.facedown {
+	float: left;
+	width: 30px;
+	height: 30px;
+	border: 1px solid black;
+	background-color: #0000ee;
+	margin: 5px;
+}

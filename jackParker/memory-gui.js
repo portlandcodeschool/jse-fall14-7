@@ -81,7 +81,7 @@ var MemoryGUI = (function () {
 			.appendTo('#memorygame');
 		
 		// add a width to our memorygame container
-		memorygame.width(memorygame.outerWidth()).css('display', 'block');
+		memorygame.width(memorygame.outerWidth() + 40).css('display', 'block');
 		
 		// make each card clickable
 		memorygame.on('click', '.card', function() {

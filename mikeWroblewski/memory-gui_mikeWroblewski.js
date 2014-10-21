@@ -16,7 +16,7 @@ var MemoryGUI = (function () {
 		var clickFunc = function(td) {
 			td.addEventListener('click',function(evt){
 
-				game.lift(td.id); // calls lift function from MemoryGame module
+				clickFn(td.id); // calls lift function from MemoryGame module
 				
 			});
 		}
@@ -58,42 +58,50 @@ var MemoryGUI = (function () {
 		resetButton.addEventListener('click', function(evt) {
 			
 			game.reset();
-			// now reset GUI, too
 
 		});
 		
 
 		memorygame.insertBefore(resetButton,table);
 		document.body.appendChild(table);
+
+
+		// // public methods:
+
+		// ==== GUI Reset =====
+		// ====================
+		this.reset = function() {
+
+			// reset all cards to face down
+
+			console.log("The GUI board has been reset.");
+		}
+
+		this.show = function(where,value) {
+
+			var tabDat = document.getElementById(where); // find the element with the id that matches 'where'
+			var dispVal = document.createTextNode(value); // create a text node for 'value'
+
+			tabDat.appendChild(dispVal); // append the text node to the element
+
+			tabDat.classList.add('faceup'); // change CSS class for specfic td
+
+			// console.log("gui show "+where+", "+value+" function");
+
+		}
+
+		this.removeSoon = function(whereArr) {
+
+			console.log("Will remove "+whereArr+" soon");
+		}
+
+		this.hideSoon = function(whereArr) {
+
+			console.log("Will hide "+whereArr+" soon");
+		}
+
 	};
 
-	// // public methods:
-
-	// ==== Reset =====
-	// ================
-	this.reset = function() {
-
-		// reset all cards to face down
-
-		console.log("The board has been reset.");
-	}
-
-	this.show = function(where,value) {
-
-		where = td.id;
-
-		where.classList.add('faceup');
-
-		console.log("GUI shows card");
-	}
-
-	this.removeSoon = function(whereArr) {
-		console.log("Will remove soon");
-	}
-
-	this.hideSoon = function(whereArr) {
-		console.log("Will hide soon");
-	}
 
 	return GUI;
 

@@ -8,8 +8,6 @@ var MemoryGame = (function() {
 
 		var displayCard = cardset.display;
 
-		var gui = new GuiCtor(board.length)
-
 
 		// ==== Reset Cards Array =====
 		// ============================				
@@ -24,6 +22,7 @@ var MemoryGame = (function() {
 			  board[i] = t;
 			}
 			faceupArr[0] = undefined;
+			gui.reset();
 			console.log("The board has been reset.");
 		};
 
@@ -61,7 +60,8 @@ var MemoryGame = (function() {
 
 			if (faceupArr[0] === undefined) { // if no other card has been lifted
 				faceupArr = board.slice(where,where+1); // place the first lifted card into a seperate array for comparison
-				console.log(faceupArr[0]);
+				// console.log(faceupArr[0]);
+				gui.show(where, faceupArr[0]);
 				if (displayCard === null) { // if no displayCard is given
 					return board[where]; // return lifted card
 				} else {
@@ -69,6 +69,7 @@ var MemoryGame = (function() {
 				}
 
 			} else if (board[where] === faceupArr[0]) {
+				console.log("You already clicked me")
 				return false; // if element (where) has already been lifted
 
 			} else if (matchCards(faceupArr[0],board[where])) { // if cards match
@@ -76,6 +77,7 @@ var MemoryGame = (function() {
 					console.log(board[where]+".. "+"You found a match!");
 				} else {
 					console.log(displayCard(board[where])+".. "+"You found a match!");
+					gui.removeSoon(where);
 				}
 				board.splice(where,1) && board.splice(board.indexOf(faceupArr[0]),1);
 				faceupArr[0] = undefined;
@@ -90,10 +92,11 @@ var MemoryGame = (function() {
 			} else {
 				console.log(board[where] + " does not match " +faceupArr[0]+ ".. Try again.");
 				faceupArr[0] = undefined;
+				gui.hideSoon(where);
 			}
 		};
 
-		//...
+		var gui = new GuiCtor(board.length,this.lift,this.reset);
 
 	}
 

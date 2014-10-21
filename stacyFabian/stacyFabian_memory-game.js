@@ -7,11 +7,6 @@ var MemoryGame = (function() {
 
 
 
-
-
-
-
-
 	}
 
 	return Memory;

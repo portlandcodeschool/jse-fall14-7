@@ -23,30 +23,30 @@ var MemoryGUI = (function () {
 			}
 		}
 		gameBoard.appendChild(table);
+		document.appendChild(gameBoard);
 	}
-	document.appendChild(gameBoard);
 });
 
 
-	// public methods:
-	this.reset = function() { // double-check variables and such.
-		slots = values.slice();
-		length = values.length;
-		there = false;
-		shuffle(slots);
-		}
-	reset();
+// 	// public methods:
+// 	this.reset = function() { // double-check variables and such.
+// 		slots = values.slice();
+// 		length = values.length;
+// 		there = false;
+// 		shuffle(slots);
+// 		}
+// 	reset();
 
-	this.show = function(where,what) {
-		//...
-	}
+// 	this.show = function(where,what) {
+// 		//...
+// 	}
 
-	this.removeSoon = function(whereArr) {
-		//...
-	}
+// 	this.removeSoon = function(whereArr) {
+// 		//...
+// 	}
 
-	this.hideSoon = function(whereArr) {
-		//...
-	}
-	return GUI;
-})();
+// 	this.hideSoon = function(whereArr) {
+// 		//...
+// 	}
+// 	return GUI;
+// })();

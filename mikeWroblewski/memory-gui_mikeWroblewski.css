@@ -16,8 +16,9 @@
 */
 
 #resetbutton {
-	display:inline-block;
-	text-align:center;
+	clear:both;
+	display:block;
+	margin: 0 auto;
 }
 
 /*

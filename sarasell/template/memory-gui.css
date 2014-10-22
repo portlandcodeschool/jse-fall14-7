@@ -4,25 +4,30 @@
 
 }
 
-#memorygame div.facedown {
-	width: 60px;
-	height: 75px;
+#memorygame cell {
+	float: left;
+	display: inline-block;
+	width: 100%;
+}
+
+#memorygame cell.facedown {
+	width: 80px;
+	height: 95px;
+	border: 1px solid black;
+	background: grey;
+	margin: 10px;
+	border-radius: 5px;
+}
+
+#memorygame cell.faceup {
+	width: 80px;
+	height: 95px;
 	border: 1px solid black;
 	background: purple;
 	margin: 10px;
 	border-radius: 5px;
 }
 
-#memorygame div.faceup {
-	width: 60px;
-	height: 75px;
-	border: 1px solid black;
-	background: purple;
-	margin: 10px;
-	border-radius: 5px;
-}
-
-#memorygame div.matched {
+#memorygame cell.matched {
 	visibility: hidden;
 }
-

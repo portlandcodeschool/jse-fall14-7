@@ -1,7 +1,7 @@
 var MemoryGUI = (function () {
 
 	function GUI(length,clickFn,resetGameFn) {
-
+		var gameBoard = document.getElementById('memorygame');
 		var table = document.createElement('table');
 		table.id = "memoryboard";
 
@@ -18,17 +18,15 @@ var MemoryGUI = (function () {
 					var td = document.createElement('td');
 					tr.appendChild(td);
 					td.id ='row'+row+'col'+col;
-				};
+				}
 				table.appendChild(row);
-			};
-			makeGrid(length);
-		};
-		// var gameBoard = document.getElementById('memorygame');
-		// gameBoard.appendChild(table);
-	};
-)};
+			}
+		}
+		gameBoard.appendChild(table);
+	}
+	document.appendChild(gameBoard);
+});
 
-	document.body.appendChild(gameBoard);
 
 	// public methods:
 	this.reset = function() { // double-check variables and such.
@@ -38,7 +36,6 @@ var MemoryGUI = (function () {
 		shuffle(slots);
 		}
 	reset();
-	}
 
 	this.show = function(where,what) {
 		//...
@@ -53,4 +50,3 @@ var MemoryGUI = (function () {
 	}
 	return GUI;
 })();
-}

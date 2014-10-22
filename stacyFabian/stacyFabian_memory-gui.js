@@ -1,33 +1,45 @@
 var MemoryGUI = (function () {
 
-	//...
-
 	function GUI(length,clickFn,resetGameFn) {
 
+		var table = document.createElement('table');
+		table.id = "memoryboard";
 
 		function makeGrid(length) {
-			var container = document.getElementById('memoryGame')
-			// var numCols = Math.ceil(Math.sqrt(length)); // use the css to set the columns to break at a pretty point
+			var boardWidth = Math.floor(Math.sqrt(length));
+			var boardHeight = Math.ceil(length/boardWidth);
+			var cellID = 0;
 
-			for (var i=0; i<length; ++i) {
-				var div = document.createElement('div');
-				div.id = "cell"+i;
-				div.classList.add('facedown');
-				container.appendChild(div);
-			}
+			for (var row=0; row<boardHeight; ++row) {
+				var tr = document.createElement('tr');
+				table.appendChild(tr);
+				
+				for (var col=0; col<boardWidth; ++col) {
+					var td = document.createElement('td');
+					tr.appendChild(td);
+					td.id = cellId++;
+				};
+				table.appendChild(row);
+				cell.id = 'row'+row+'col'+col;
+			};
 			makeGrid(length);
-		}
-	}
+			document.body.appendChild('table');
+		};
+		var gameBoard = document.getElementById('memorygame');
+		gameBoard.appendChild(table);
+	};
+)};
+
+	document.body.appendChild(gameBoard);
 
 	// public methods:
 	this.reset = function() { // double-check variables and such.
-		var reset = function() {  //public method
-			slots = values.slice();
-			length = values.length;
-			there = false;
-			shuffle(slots);
+		slots = values.slice();
+		length = values.length;
+		there = false;
+		shuffle(slots);
 		}
-		reset();
+	reset();
 	}
 
 	this.show = function(where,what) {
@@ -43,3 +55,4 @@ var MemoryGUI = (function () {
 	}
 	return GUI;
 })();
+}

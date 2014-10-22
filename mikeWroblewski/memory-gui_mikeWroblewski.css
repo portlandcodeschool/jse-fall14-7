@@ -1,22 +1,37 @@
 /* CSS for GUI...*/
 
 /*
+=== Memory Board header/reset button ===
+========================================
+*/
+
+#memoryboard {
+	display:inline-block;
+	text-align:center;
+}
+
+/*
+=== Reset Button ===
+====================
+*/
+
+#resetbutton {
+	display:inline-block;
+	text-align:center;
+}
+
+/*
 === Game Board ===
 ==================
 */
 
-#memorygame {
-	display:inline-block;
+#gametable {
 	margin: 0 auto;
-	empty-cells:show;
-	border-spacing:2px;
-	text-align:center;
-	font-size:20pt;
 }
 
-#gametable .facedown {
-	width:35px;
-	height:45px;
+#gametable td.facedown {
+	width:55px;
+	height:65px;
 	border:1px solid black;
 	border-radius:5px;
 	background:black;
@@ -27,22 +42,11 @@
 	border:none;
 	text-align:center;
 	margin: 0 auto;
-	font-size: 20pt;
+	font-size: 25pt;
 	background:tan;
 }
 
 #gametable td.matched {
-	background:red;
-}
-
-/*
-=== Reset Button ===
-====================
-*/
-
-#resetbutton::before {
-	display: inline-block;
-	margin: 0 auto;
-	text-align:center;
+	visibility:hidden;
 }
 

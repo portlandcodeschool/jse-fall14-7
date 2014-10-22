@@ -4,15 +4,14 @@ var MemoryGUI = (function () {
 	function GUI(len,clickFn,resetGameFn) {
 
 
-		if(Math.sqrt(len) % 1 != 0) { // if len does not have a square root...
-			var boardW = Math.floor(Math.sqrt(len));
-			var boardH = Math.ceil(len/boardW);
-			console.log(boardH, boardW);
-		} else { // if len has a square root...
-			var boardW = Math.sqrt(len);
-			var boardH = Math.sqrt(len);
-		}	
+		// === Finding dimensions of game board ===
+		// ========================================
+		var boardW = Math.floor(Math.sqrt(len));
+		var boardH = Math.ceil(len/boardW);
 
+
+		// === Click Function for game board ===
+		// =====================================
 		var clickFunc = function(td) {
 			td.addEventListener('click',function(evt){
 
@@ -21,6 +20,9 @@ var MemoryGUI = (function () {
 			});
 		}
 
+
+		// === Creating board using dimensions found ===
+		// =============================================
 		var table = document.createElement('table');
 		table.id = "gametable";
 
@@ -55,9 +57,12 @@ var MemoryGUI = (function () {
 		resetButton.appendChild(resetLable);
 		resetButton.id = "resetbutton";
 
+
+		// === Reset Button ===
+		// ====================
 		resetButton.addEventListener('click', function(evt) {
 			
-			game.reset();
+			resetGameFn();
 
 		});
 		
@@ -72,9 +77,9 @@ var MemoryGUI = (function () {
 		// ====================
 		this.reset = function() {
 
-			// reset all cards to face down
+			$('td').removeClass('faceup matched'); // removes unwanted classes from all cards
+			$('.facedown').empty(); // removes text (textNode) from any element with class "facedown"
 
-			console.log("The GUI board has been reset.");
 		}
 
 		this.show = function(where,value) {
@@ -92,12 +97,41 @@ var MemoryGUI = (function () {
 
 		this.removeSoon = function(whereArr) {
 
-			console.log("Will remove "+whereArr+" soon");
+			var card1 = whereArr.splice(0,1);
+			var card2 = whereArr;
+
+			var c1 = document.getElementById(card1);
+			var c2 = document.getElementById(card2);
+
+			window.setTimeout(function() {
+
+				c1.classList.add('matched');
+				c2.classList.add('matched');
+
+			}, 1500);
+
+			// console.log("Will remove "+card1+" & "+card2+" soon");
 		}
 
 		this.hideSoon = function(whereArr) {
 
-			console.log("Will hide "+whereArr+" soon");
+			var card1 = whereArr.splice(0,1);
+			var card2 = whereArr;
+
+			var c1 = document.getElementById(card1);
+			var c2 = document.getElementById(card2);
+
+			window.setTimeout(function() {
+
+				c1.classList.remove('faceup');
+				c2.classList.remove('faceup');
+
+				c1.removeChild(c1.firstChild);
+				c2.removeChild(c2.firstChild);
+
+			}, 1500);
+
+			// console.log("Will hide "+card1+" & "+card2+" soon");
 		}
 
 	};

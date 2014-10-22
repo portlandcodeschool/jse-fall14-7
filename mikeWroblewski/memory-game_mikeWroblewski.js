@@ -24,7 +24,7 @@ var MemoryGame = (function() {
 			  board[i] = t;
 			}
 			faceupArr[0] = undefined;
-			gui.reset();
+			gui.reset(); // callin GUI reset method
 			console.log("The board has been reset.");
 		};
 

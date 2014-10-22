@@ -15,7 +15,7 @@ var MemoryGUI = (function () {
 		var clickFunc = function(td) {
 			td.addEventListener('click',function(evt){
 
-				clickFn(td.id); // calls lift function from MemoryGame module
+				clickFn(td.id); // calls lift method from MemoryGame module
 				
 			});
 		}
@@ -62,7 +62,7 @@ var MemoryGUI = (function () {
 		// ====================
 		resetButton.addEventListener('click', function(evt) {
 			
-			resetGameFn();
+			resetGameFn(); // calls reset method from MemoryGame module
 
 		});
 		
@@ -97,16 +97,16 @@ var MemoryGUI = (function () {
 
 		this.removeSoon = function(whereArr) {
 
-			var card1 = whereArr.splice(0,1);
-			var card2 = whereArr;
+			var card1 = whereArr.splice(0,1); // remove & store first value from whereArr
+			var card2 = whereArr; // store remaining value from whereArr
 
-			var c1 = document.getElementById(card1);
-			var c2 = document.getElementById(card2);
+			var c1 = document.getElementById(card1); // store the location of card1
+			var c2 = document.getElementById(card2); // ...same for card2
 
 			window.setTimeout(function() {
 
-				c1.classList.add('matched');
-				c2.classList.add('matched');
+				c1.classList.add('matched'); // add matched CSS to c1
+				c2.classList.add('matched'); // ...same for c2
 
 			}, 1500);
 
@@ -126,8 +126,8 @@ var MemoryGUI = (function () {
 				c1.classList.remove('faceup');
 				c2.classList.remove('faceup');
 
-				c1.removeChild(c1.firstChild);
-				c2.removeChild(c2.firstChild);
+				c1.removeChild(c1.firstChild); // removes textNode from revealed card
+				c2.removeChild(c2.firstChild); // ...same
 
 			}, 1500);
 

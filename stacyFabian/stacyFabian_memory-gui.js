@@ -17,10 +17,9 @@ var MemoryGUI = (function () {
 				for (var col=0; col<boardWidth; ++col) {
 					var td = document.createElement('td');
 					tr.appendChild(td);
-					td.id = cellId++;
+					td.id ='row'+row+'col'+col;
 				};
 				table.appendChild(row);
-				cell.id = 'row'+row+'col'+col;
 			};
 			makeGrid(length);
 			document.body.appendChild('table');

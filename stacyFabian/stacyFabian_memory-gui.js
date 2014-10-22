@@ -22,10 +22,9 @@ var MemoryGUI = (function () {
 				table.appendChild(row);
 			};
 			makeGrid(length);
-			document.body.appendChild('table');
 		};
-		var gameBoard = document.getElementById('memorygame');
-		gameBoard.appendChild(table);
+		// var gameBoard = document.getElementById('memorygame');
+		// gameBoard.appendChild(table);
 	};
 )};
 

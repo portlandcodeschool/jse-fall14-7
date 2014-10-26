@@ -1,5 +1,9 @@
 var MemoryGame = (function() {
 
+	var matchedArr = [];
+
+	var faceupArr = [];
+
 	function Memory(GuiCtor,cardset,gameoverFn) {
 
 		var board = cardset.values.slice();
@@ -24,9 +28,11 @@ var MemoryGame = (function() {
 			  board[i] = t;
 			}
 			faceupArr[0] = undefined;
+			matchedArr.splice(0);
 			gui.reset(); // callin GUI reset method
 			console.log("The board has been reset.");
 		};
+
 
 		// ==== Checking Position & Value of the first lifted card ====
 		// ============================================================
@@ -45,6 +51,7 @@ var MemoryGame = (function() {
 				}
 			}
 		};
+
 
 		// ==== Check Board for remaining positions of cards ====
 		// ======================================================
@@ -78,11 +85,11 @@ var MemoryGame = (function() {
 				return false; // if element (where) has already been lifted
 
 			} else if (matchCards(faceupArr[0],board[where])) { // if cards match
-
+				console.log("First card: "+faceupArr[0]+"; Second card: "+board[where]);
 				if (displayCard === null) {
 					gui.show(where, board[where]); // calling GUI show method on SECOND card
 					gui.removeSoon([where, board.indexOf(faceupArr[0])]); // returning an array of 2 numbers (which will be the td.ids) to GUI removeSoon method
-					console.log(board[where]+".. "+"You found a match!"); // 
+					console.log(board[where]+".. "+"You found a match!");
 
 				} else {
 					console.log(displayCard(board[where])+".. "+"You found a match!");
@@ -90,15 +97,18 @@ var MemoryGame = (function() {
 					gui.removeSoon([where, board.indexOf(faceupArr[0])]);
 				}
 
-				board.splice(where,1) && board.splice(board.indexOf(faceupArr[0]),1);
+				// board.splice(where,1) && board.splice(board.indexOf(faceupArr[0]),1);
+				matchedArr.push(board[where], faceupArr[0]);
 				faceupArr[0] = undefined;
 
-				if (board.length === 0) { // if board is empty
+				if (board.length === matchedArr.length) { // if board is empty
 
 					if (endgameFn !== undefined) { // if endgameFn is given
+						gui.gameReveal(); // calls GUI gameReveal method and places all cards face up
 						return endgameFn();
 
 					} else {
+						gui.gameReveal();
 						console.log("Game Over")
 					}
 				}
@@ -115,9 +125,8 @@ var MemoryGame = (function() {
 
 		var gui = new GuiCtor(board.length,this.lift,this.reset);
 
+		this.reset();
 	}
-
-	var faceupArr = [];
 
 	return Memory;
 })();

@@ -1,56 +1,48 @@
 var MemoryGUI = (function () {
 
-
 	function GUI(len,clickFn,resetGameFn) {
 
 
-		// === Finding dimensions of game board ===
-		// ========================================
-		var boardW = Math.floor(Math.sqrt(len));
-		var boardH = Math.ceil(len/boardW);
+		// // === Finding dimensions of game board ===
+		// // ========================================
+		// var boardW = Math.floor(Math.sqrt(len));
+		// var boardH = Math.ceil(len/boardW);
 
 
 		// === Click Function for game board ===
 		// =====================================
-		var clickFunc = function(td) {
-			td.addEventListener('click',function(evt){
+		var clickFunc = function(card) {
+			card.addEventListener('click',function(evt){
 
-				clickFn(td.id); // calls lift method from MemoryGame module
-				
+				clickFn(card.id); // calls lift method from MemoryGame module
 			});
 		}
 
 
-		// === Creating board using dimensions found ===
+		// === Creating board using len argument ===
 		// =============================================
-		var table = document.createElement('table');
-		table.id = "gametable";
+		var container = document.createElement('div');
+		container.id = "gametable";
 
-		var totalTd = 0
+		var totalCard = 0
 
-		for (var row = 0; row<boardH; ++row) {
-			var tr = document.createElement('tr');
-			table.appendChild(tr);
+		for (var row = 0; row<len; ++row) {
 
-			for (var col=0; col<boardW; ++col) {
+		    if (totalCard<len) {
 
-				if (totalTd<len) {
+		        var card = document.createElement('div');
+		        container.appendChild(card);
 
-					var td = document.createElement('td');
-					tr.appendChild(td);
+		        card.id = totalCard++
 
-					td.id = totalTd++
+		        card.classList.add('facedown');
 
-					td.classList.add('facedown');
-
-					clickFunc(td);
-				}
-
-			}
+		        clickFunc(card);
+		    }
 		}
 
 		var memorygame = document.getElementById('memorygame');
-		memorygame.appendChild(table);
+		memorygame.appendChild(container);
 
 		var resetButton = document.createElement('button');
 		var resetLable = document.createTextNode('Reset Game');
@@ -63,12 +55,9 @@ var MemoryGUI = (function () {
 		resetButton.addEventListener('click', function(evt) {
 			
 			resetGameFn(); // calls reset method from MemoryGame module
-
 		});
 		
-
-		memorygame.insertBefore(resetButton,table);
-		document.body.appendChild(table);
+		memorygame.insertBefore(resetButton,container);
 
 
 		// // public methods:
@@ -77,22 +66,19 @@ var MemoryGUI = (function () {
 		// ====================
 		this.reset = function() {
 
-			$('td').removeClass('faceup matched'); // removes unwanted classes from all cards
-			$('.facedown').empty(); // removes text (textNode) from any element with class "facedown"
-
+			$('.facedown').removeClass('faceup matched'); // removes unwanted classes from all cards
+			$('.facedown span').remove(); // removes all <span> elements from any element with class "facedown"
 		}
 
 		this.show = function(where,value) {
 
 			var tabDat = document.getElementById(where); // find the element with the id that matches 'where'
-			var dispVal = document.createTextNode(value); // create a text node for 'value'
+			var newSpan = document.createElement('span'); // creates a <span>
 
-			tabDat.appendChild(dispVal); // append the text node to the element
+			tabDat.appendChild(newSpan); // append the text node to the element
+			newSpan.innerHTML = value; // place 'value' inside of the span (this could be any HTML code)
 
-			tabDat.classList.add('faceup'); // change CSS class for specfic td
-
-			// console.log("gui show "+where+", "+value+" function");
-
+			tabDat.classList.add('faceup'); // change CSS class for specfic card
 		}
 
 		this.removeSoon = function(whereArr) {
@@ -108,9 +94,7 @@ var MemoryGUI = (function () {
 				c1.classList.add('matched'); // add matched CSS to c1
 				c2.classList.add('matched'); // ...same for c2
 
-			}, 1500);
-
-			// console.log("Will remove "+card1+" & "+card2+" soon");
+			}, 1000);
 		}
 
 		this.hideSoon = function(whereArr) {
@@ -129,11 +113,17 @@ var MemoryGUI = (function () {
 				c1.removeChild(c1.firstChild); // removes textNode from revealed card
 				c2.removeChild(c2.firstChild); // ...same
 
-			}, 1500);
-
-			// console.log("Will hide "+card1+" & "+card2+" soon");
+			}, 1000);
 		}
 
+		this.gameReveal = function() {
+
+			window.setTimeout(function(){
+
+				$('.facedown').removeClass('matched');
+
+			}, 1020);
+		}
 	};
 
 

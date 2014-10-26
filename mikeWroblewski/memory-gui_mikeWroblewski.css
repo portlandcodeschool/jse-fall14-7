@@ -1,13 +1,30 @@
 /* CSS for GUI...*/
+.clearfix{*zoom:1;}.clearfix:before,.clearfix:after{display:table;content:"";line-height:0;}.clearfix:after{clear:both;}
 
+/*
+=== html ===
+============
+*/
+
+html {
+	background-color: black;
+	/*background-color:#292929;*/
+	margin: 0 auto;
+}
+
+body {
+	width: 450px;
+	margin: 0 auto;
+}
 /*
 === Memory Board header/reset button ===
 ========================================
 */
 
-#memoryboard {
-	display:inline-block;
+#memorygame {
+	display:block;
 	text-align:center;
+	margin: 0 auto;
 }
 
 /*
@@ -27,27 +44,51 @@
 */
 
 #gametable {
+	display:block;
 	margin: 0 auto;
 }
 
-#gametable td.facedown {
-	width:55px;
-	height:65px;
-	border:1px solid black;
+#gametable div.facedown {
+	width:78px;
+	height:110px;
 	border-radius:5px;
-	background:black;
+	/*border:1.5px solid tan;*/
+	background:url(images/blackcardback.jpg);
+	background-size:contain;
+	background-repeat:no-repeat;
+	float:left;
+	margin: 6px;
+	transition: background-color 1s ease,
+				text 1s ease,
+				text-shadow 1s ease;
 }
 
-#gametable td.faceup {
-	background:none;
-	border:none;
+#gametable div.facedown span {
+	display:block;
+	width:100%;
 	text-align:center;
-	margin: 0 auto;
-	font-size: 25pt;
-	background:tan;
+	margin-top: 48%;
 }
 
-#gametable td.matched {
+#gametable div.faceup {
+	background:none;
+	text-align:center;
+	font-size: 28pt;
+	/*background:tan;*/
+	background: #8C8C8C;
+	text-shadow: 2px 2px #5E5E5E;
+}
+
+#gametable div.matched {
+	/*background-color:#C49000;*/
+	background-color:black;
+}
+
+#gametable div.matched span {
 	visibility:hidden;
 }
+
+
+
+
 

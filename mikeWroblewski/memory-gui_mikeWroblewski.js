@@ -59,6 +59,8 @@ var MemoryGUI = (function () {
 		
 		memorygame.insertBefore(resetButton,container);
 
+		var topSpace = document.createElement('p');
+		$('body').prepend(topSpace);
 
 		// // public methods:
 

@@ -2,12 +2,12 @@
 .clearfix{*zoom:1;}.clearfix:before,.clearfix:after{display:table;content:"";line-height:0;}.clearfix:after{clear:both;}
 
 /*
-=== html ===
-============
+=== html & body ===
+===================
 */
 
 html {
-	background-color: black;
+	background-color: #191919;
 	/*background-color:#292929;*/
 	margin: 0 auto;
 }
@@ -15,6 +15,10 @@ html {
 body {
 	width: 450px;
 	margin: 0 auto;
+}
+
+p {
+	margin: 20px auto;
 }
 /*
 === Memory Board header/reset button ===

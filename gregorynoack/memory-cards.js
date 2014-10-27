@@ -68,22 +68,22 @@ var MemoryCardsSymb = (function(){
 				,'fa-ils'
 				, 'fa-star-o'
 				, 'fa-star-o'
-				// , 'fa-bomb'
-				// , 'fa-bomb'
-				// , 'fa-circle-o'
-				// , 'fa-circle-o'
-				// , 'fa-arrows-alt'
-				// , 'fa-arrows-alt'
-				// , 'fa-times'
-				// , 'fa-times'
-				// , 'fa-usd'
-				// , 'fa-usd'
-				// , 'fa-bolt'
-				// , 'fa-bolt'
-				// , 'fa-bell'
-				// , 'fa-bell'
-				// , 'fa-bullseye'
-				// , 'fa-bullseye'
+				, 'fa-bomb'
+				, 'fa-bomb'
+				, 'fa-circle-o'
+				, 'fa-circle-o'
+				, 'fa-arrows-alt'
+				, 'fa-arrows-alt'
+				, 'fa-times'
+				, 'fa-times'
+				, 'fa-usd'
+				, 'fa-usd'
+				, 'fa-bolt'
+				, 'fa-bolt'
+				, 'fa-bell'
+				, 'fa-bell'
+				, 'fa-bullseye'
+				, 'fa-bullseye'
 			];
 
 
@@ -118,7 +118,7 @@ var MemoryCardsSymb = (function(){
 })();
 
 function winFn(){
-	return $('#memorygame').prepend('<div class="winner">you win</div>');
+	return $('body').prepend('<div class="winner">you win</div>');
 }
 
 

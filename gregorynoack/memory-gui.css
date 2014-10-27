@@ -16,6 +16,22 @@ body{
 	padding: 50px;
 }
 
+.winner{
+	position: absolute;
+	width: 100%;
+	display: block;
+	text-align: center;
+	top: 0;
+	bottom: 0;
+	background:rgba(0, 0, 0, 0.58);
+	color: #fff;
+	font-size: 50px;
+	z-index: 100;
+	padding: 60px 0 0;
+	font-family: helvetica;
+	text-transform: uppercase;
+}
+
 .row{
 	width: 100%; 
 	background: transparent;
@@ -96,6 +112,8 @@ body{
 	outline: none;
 	cursor: pointer;
 	transition: all 0.5s ease;
+	z-index: 110;
+	position: relative;
 }
 #reset:hover{
 	background:#793392;

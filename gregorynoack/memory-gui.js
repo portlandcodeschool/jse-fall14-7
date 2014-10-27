@@ -64,6 +64,7 @@ var MemoryGUI = (function () {
 		$( "#reset" ).on( "click", function() {
 			$('.card').removeClass('show match');
 			$('.card .back').remove();
+			$('.winner').remove();
 		  resetGameFn();
 		});
 				

@@ -88,7 +88,7 @@ var MemoryGUI = (function () {
 		this.removeSoon = function(whereArr) {
 
 			var card1 = whereArr.splice(0,1); // remove & store first value from whereArr
-			var card2 = whereArr; 			  // store remaining value from whereArr
+			var card2 = whereArr; // store remaining value from whereArr
 
 			var c1 = document.getElementById(card1); // store the location of card1
 			var c2 = document.getElementById(card2); // ...same for card2

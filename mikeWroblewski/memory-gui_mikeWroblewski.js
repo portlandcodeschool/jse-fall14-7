@@ -64,7 +64,7 @@ var MemoryGUI = (function () {
 		$('body').prepend(topSpace);
 
 
-		// // public methods:
+		// public methods:
 
 		// ==== GUI Reset =====
 		// ====================
@@ -76,11 +76,11 @@ var MemoryGUI = (function () {
 
 		this.show = function(where,value) {
 
-			var tabDat = document.getElementById(where); // find the element with the id that matches 'where'
+			var tabDat = document.getElementById(where);  // find the element with the id that matches 'where'
 			var newSpan = document.createElement('span'); // creates a <span>
 
 			tabDat.appendChild(newSpan); // append the text node to the element
-			newSpan.innerHTML = value; // place 'value' inside of the span (this could be any HTML code)
+			newSpan.innerHTML = value; 	 // place 'value' inside of the span (this could be any HTML code)
 
 			tabDat.classList.add('faceup'); // change CSS class for specfic card
 		}
@@ -88,7 +88,7 @@ var MemoryGUI = (function () {
 		this.removeSoon = function(whereArr) {
 
 			var card1 = whereArr.splice(0,1); // remove & store first value from whereArr
-			var card2 = whereArr; // store remaining value from whereArr
+			var card2 = whereArr; 			  // store remaining value from whereArr
 
 			var c1 = document.getElementById(card1); // store the location of card1
 			var c2 = document.getElementById(card2); // ...same for card2

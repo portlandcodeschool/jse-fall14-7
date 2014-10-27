@@ -29,7 +29,7 @@ var MemoryGame = (function() {
 			}
 			faceupArr[0] = undefined;
 			matchedArr.splice(0);
-			gui.reset(); // callin GUI reset method
+			gui.reset(); // calling GUI reset method
 			console.log("The board has been reset.");
 		};
 
@@ -85,7 +85,6 @@ var MemoryGame = (function() {
 				return false; // if element (where) has already been lifted
 
 			} else if (matchCards(faceupArr[0],board[where])) { // if cards match
-				console.log("First card: "+faceupArr[0]+"; Second card: "+board[where]);
 				if (displayCard === null) {
 					gui.show(where, board[where]); // calling GUI show method on SECOND card
 					gui.removeSoon([where, board.indexOf(faceupArr[0])]); // returning an array of 2 numbers (which will be the td.ids) to GUI removeSoon method

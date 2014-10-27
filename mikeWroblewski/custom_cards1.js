@@ -37,7 +37,6 @@ var MemoryCards = (function(){
 			if (bothArr.indexOf(b)<10 && bothArr.indexOf(a)>9) {
 				return cardNum.indexOf(b) === cardRomNu.indexOf(a);
 			}
-
 		}
 
 		this.display = function(val) {

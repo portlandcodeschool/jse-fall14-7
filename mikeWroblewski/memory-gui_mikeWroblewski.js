@@ -3,8 +3,8 @@ var MemoryGUI = (function () {
 	function GUI(len,clickFn,resetGameFn) {
 
 
-		// // === Finding dimensions of game board ===
-		// // ========================================
+		// // === Finding dimensions of game board === ** DO NOT NEED THIS WITH 'div' ELEMENTS **
+		// // ======================================== ***** WHEN DEFINING MARGINS WITH CSS *****
 		// var boardW = Math.floor(Math.sqrt(len));
 		// var boardH = Math.ceil(len/boardW);
 
@@ -12,6 +12,7 @@ var MemoryGUI = (function () {
 		// === Click Function for game board ===
 		// =====================================
 		var clickFunc = function(card) {
+
 			card.addEventListener('click',function(evt){
 
 				clickFn(card.id); // calls lift method from MemoryGame module
@@ -62,6 +63,7 @@ var MemoryGUI = (function () {
 		var topSpace = document.createElement('p');
 		$('body').prepend(topSpace);
 
+
 		// // public methods:
 
 		// ==== GUI Reset =====
@@ -69,7 +71,7 @@ var MemoryGUI = (function () {
 		this.reset = function() {
 
 			$('.facedown').removeClass('faceup matched'); // removes unwanted classes from all cards
-			$('.facedown span').remove(); // removes all <span> elements from any element with class "facedown"
+			$('.facedown span').remove(); // removes all <span> elements from any element with class "facedown span"
 		}
 
 		this.show = function(where,value) {

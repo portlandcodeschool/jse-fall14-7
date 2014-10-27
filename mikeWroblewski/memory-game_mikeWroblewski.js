@@ -68,58 +68,57 @@ var MemoryGame = (function() {
 		// ==================================================
 		this.lift = function(where) {
 
-			if (faceupArr[0] === undefined) { // if no other card has been lifted
-				faceupArr = board.slice(where,where+1); // place the first lifted card into a seperate array for comparison
+			if (matchedArr.indexOf(board[where]) === -1) { // if 'where' is NOT already in matchedArr...
 
-				if (displayCard === null) { // if no displayCard is given
-					gui.show(where, faceupArr[0]); // calling GUI show method on FIRST card
-					return board[where]; // return lifted card
+				if (faceupArr[0] === undefined) { // if no other card has been lifted
+					faceupArr = board.slice(where,where+1); // place the first lifted card into a seperate array for comparison
 
-				} else {
-					gui.show(where, faceupArr[0]); 
-					return displayCard(board[where]);
-				}
-
-			} else if (board[where] === faceupArr[0]) {
-				console.log("You already clicked me")
-				return false; // if element (where) has already been lifted
-
-			} else if (matchCards(faceupArr[0],board[where])) { // if cards match
-				if (displayCard === null) {
-					gui.show(where, board[where]); // calling GUI show method on SECOND card
-					gui.removeSoon([where, board.indexOf(faceupArr[0])]); // returning an array of 2 numbers (which will be the td.ids) to GUI removeSoon method
-					console.log(board[where]+".. "+"You found a match!");
-
-				} else {
-					console.log(displayCard(board[where])+".. "+"You found a match!");
-					gui.show(where, board[where]);
-					gui.removeSoon([where, board.indexOf(faceupArr[0])]);
-				}
-
-				// board.splice(where,1) && board.splice(board.indexOf(faceupArr[0]),1);
-				matchedArr.push(board[where], faceupArr[0]);
-				faceupArr[0] = undefined;
-
-				if (board.length === matchedArr.length) { // if board is empty
-
-					if (endgameFn !== undefined) { // if endgameFn is given
-						gui.gameReveal(); // calls GUI gameReveal method and places all cards face up
-						return endgameFn();
-
+					if (displayCard === null) { // if no displayCard is given
+						gui.show(where, faceupArr[0]); // calling GUI show method on FIRST card
+						return board[where]; // return lifted card
 					} else {
-						gui.gameReveal();
-						console.log("Game Over")
+						gui.show(where, faceupArr[0]); 
+						return displayCard(board[where]);
 					}
+
+				} else if (board[where] === faceupArr[0]) {
+					console.log("You already clicked me")
+					return false; // if element (where) has already been lifted
+
+				} else if (matchCards(faceupArr[0],board[where])) { // if cards match
+					if (displayCard === null) {
+						gui.show(where, board[where]); // calling GUI show method on SECOND card
+						gui.removeSoon([where, board.indexOf(faceupArr[0])]); // returning an array of 2 numbers (which will be the td.ids) to GUI removeSoon method
+						console.log(board[where]+".. "+"You found a match!");
+					} else {
+						console.log(displayCard(board[where])+".. "+"You found a match!");
+						gui.show(where, board[where]);
+						gui.removeSoon([where, board.indexOf(faceupArr[0])]);
+					}
+
+					// board.splice(where,1) && board.splice(board.indexOf(faceupArr[0]),1);
+					matchedArr.push(board[where], faceupArr[0]);
+					faceupArr[0] = undefined;
+
+					if (board.length === matchedArr.length) { // if board is empty
+
+						if (endgameFn !== undefined) { // if endgameFn is given
+							gui.gameReveal(); // calls GUI gameReveal method and places all cards face up
+							return endgameFn();
+						} else {
+							gui.gameReveal();
+							console.log("Game Over")
+						}
+					}
+
+				} else { // if two cards DO NOT match..
+					console.log(board[where] + " does not match " +faceupArr[0]+ ".. Try again.");
+					
+					gui.show(where, board[where]); // calling GUI show method on SECOND card
+					gui.hideSoon([where, board.indexOf(faceupArr[0])]); // returning an array of 2 numbers (which will be the td.ids) to GUI hideSoon method
+					faceupArr[0] = undefined;
 				}
-
-			} else { // if two cards DO NOT match..
-
-				console.log(board[where] + " does not match " +faceupArr[0]+ ".. Try again.");
-				
-				gui.show(where, board[where]); // calling GUI show method on SECOND card
-				gui.hideSoon([where, board.indexOf(faceupArr[0])]); // returning an array of 2 numbers (which will be the td.ids) to GUI hideSoon method
-				faceupArr[0] = undefined;
-			}
+			}	
 		};
 
 		var gui = new GuiCtor(board.length,this.lift,this.reset);

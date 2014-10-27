@@ -1,120 +1,169 @@
-var MemoryGUI = (function (){
+var MemoryGUI = (function(){
 
-	function GUI(len,clickFn,resetGameFn) {
+	function GUI(obj, clickFn, resetGameFn) {
 
-		if(Math.sqrt(len) % 1 !== 0){
+		var container = document.createElement('div');
 
-			var boardW = Math.floor(Math.sqrt(len));
-		
-			var boardH = Math.ceil(len/boardW);
-			
-		}
-
-		var boardW = Math.sqrt(len);
-
-		var boardH = Math.sqrt(len);
-
-		// var container = document.getElementById('memorygame')
-
-		var table = document.createElement('table');
-	
-		table.id = "gametable";
+		container.id = "gametable";
 
 
-		var totalTd = 0;
-		
-		for (var row=0; row<boardH; ++row) {
-			
-			var tr = document.createElement('tr');
-			
-			table.appendChild(tr);
+		for(var i = 0; i < obj; ++i){
 
-			for (var col=0; col<boardW; ++col) {
+			var card = document.createElement('div');
 
-				if(totalTd < len){
-				
-					var td = document.createElement('td');
-						
-					tr.appendChild(td);
-					
-					td.id = totalTd++;
+			container.appendChild(card);
 
-					td.classList.add('facedown');
+			card.id = i;
 
-					clickFn(td);
-				}
-			}
-		}
+			card.className = 'card facedown';
+
+			liftCard(card);
+
+		};
 
 		var memorygame = document.getElementById('memorygame');
 
-		memorygame.appendChild(table);	
+		memorygame.appendChild(container);	
 
+		document.body.appendChild(memorygame);
+
+		
 		var resetBttn = document.createElement('button');
 
-		memorygame.insertBefore(resetBttn,table);
+		memorygame.insertBefore(resetBttn,container);
 
 		var rsttxt = document.createTextNode('reset');
 
 		resetBttn.appendChild(rsttxt);
 
-		resetBttn.classList.add('resetBttn');
+		resetBttn.className = 'resetBttn';
 
-		resetBttn.addEventListener('click', function(evt){ td.classList.add('facedown'); });
 
+		resetBttn.addEventListener('click', function(evt){rst(); resetGameFn();
+		});
 		
-		
+	
+
 
 		// public methods:
 		this.reset = function() {
 
-			td.classList.add('reset');
-			
+			$('.faceup span').remove();
+
+			$('.matched span').remove();
+
+
+			$('.faceup').removeClass('faceup').addClass('facedown');
+
+			$('.matched').removeClass('matched').addClass('facedown');
 
 		};
 
-		this.show = function(where,value) {
+		
+		var rst = this.reset;
 
-			where = td.id;
 
-			where.classList.add('faceup');
+		this.show = function(where,what) {
+
+			var cell = document.getElementById(where);
+
+			var value = document.createElement('span');
+
+			value.className = 'value';
+
+			cell.className = 'card faceup';
+
+			cell.appendChild(value);
+
+			value.innerHTML = what;
+
+
 
 		};
 
 		this.removeSoon = function(whereArr) {
-			//...
+			
+			var card1 = whereArr.slice(0,1);
+			
+			var card2 = whereArr.slice(1,2);
+			
+			var c1 = document.getElementById(card1);
+			
+			var c2 = document.getElementById(card2);
+			
+			window.setTimeout(function() {
+				
+				c1.className = 'card matched';
+
+				c2.className = 'card matched';
+
+				c1.removeChild(c1.firstChild);
+
+				c2.removeChild(c2.firstChild);
+
+			}, 500);
 		};
+		
 		this.hideSoon = function(whereArr) {
-			//...
+			
+			var card1 = whereArr.slice(0,1);
+
+			var card2 = whereArr.slice(1,2);
+			
+			var c1 = document.getElementById(card1);
+			
+			var c2 = document.getElementById(card2);
+			
+			window.setTimeout(function() {
+				
+				c1.className = 'card facedown';
+
+				c2.className = 'card facedown';
+
+				c1.removeChild(c1.firstChild);
+
+				c2.removeChild(c2.firstChild);
+
+			}, 500);
 		};
 
-		var rst = this.reset;
-	}	
+		function liftCard(card){
+
+			card.addEventListener('click',function(evt){
+				
+				clickFn(card.id);
+
+			});
+		}
+	}
 
 	return GUI;
 })();
 
-function clickFn1(td){
-
-	td.addEventListener('click',function(evt){
-
-		td.classList.add('faceup');
-
-		console.log(td.id);
-	});
 
 
+var game, arr;
 
+// function go(){
+	
+// 	game = new MemoryGUI(52,liftCard);
 
-}
+// }
+
+// window.addEventListener('load', go);
 
 
 
-function go(){
-	MemoryGUI(52,clickFn1);
-}
 
-window.addEventListener('load',go);
+
+
+
+
+
+
+
+
+
 
 
 

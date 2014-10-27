@@ -4,21 +4,31 @@ var MemoryGame = (function() {
 
 		var faceupValuesArr = [];
 
-		var board = cardset.slice();
+		var board = cardset.values.slice();
+		
 
+		var matchedArr = [];
+
+		var matchCards = cardset.match;
+		
 		this.reset = function(){
 
 			//create new game board			
-			board = cardset.slice();
+			board = cardset.values.slice();
 			
 			//shuffling the entire array
-			board.sort(shuffle);
+			board.sort(shuffle(this));
 
 			faceupValuesArr = []
 
-			return 'ready to play!';
+			matchedArr = []
+			
+			console.log('Game has been reset. ready to play!');
 
+			alert('Game has been reset. ready to play!');
 		};
+
+		this.reset(); //shuffles upon load
 
 		
 		this.faceupWhere = function(){
@@ -47,67 +57,119 @@ var MemoryGame = (function() {
 
 		
 		this.lift = function(where){
-	
-			var lifted = board[where];
-	
-			if(lifted !== undefined){
+
+			if(board[where] !== undefined){
 				
 				if(faceupValuesArr[0] === undefined){
 
-					faceupValuesArr.push(lifted);
+					faceupValuesArr.push(where);
 
-					board.splice(where,1, 'face up');
+					board.slice(where,1);
 
-					if(displayFn){
-
-						return displayFn(faceupValuesArr[0]);
+					if(GuiCtor){
+						
+						console.log(board[where]);
+						
+						 return gui.show(where, board[faceupValuesArr[0]]);
 					}
 					else{
 
-						return this.faceupValue();
+						console.log(this.faceupValue());
 					}
 				}
 
-				else if(matchFn(lifted, this.faceupValue())){
+				if(faceupValuesArr[0] === where){
 
-					console.log(lifted + ', ' + this.faceupValue());
+					console.log('You have already clicked on this card');
 
-					board.splice(where,1);
+					return false;
+
+				}
+
+				else if(matchCards(board[where], board[faceupValuesArr[0]])){
+					
+					console.log(board[where] + ', and ' + board[faceupValuesArr[0]]);
+					
+					gui.show(where,board[where]);
+
+					gui.removeSoon([where, faceupValuesArr[0]]);
+
+					matchedArr.push(board[where]);
+
+					matchedArr.push(board[faceupValuesArr[0]]);
+
+					delete board[where];
+
+					delete board[faceupValuesArr[0]];
 
 					faceupValuesArr.shift();
+					console.log(board.length, matchedArr.length)
+					if(board.length === matchedArr.length){	
+				
+						if(gameoverFn){
 
-					board.splice(board.indexOf('face up'),1);
+							return gameoverFn();
+						}
+						else{
+							console.log("No more pairs! You Won!");
 
-					return 'Match!';
+							alert("No more pairs! You Won!");
+						}
 					}
+					else{
+
+						console.log('Match!');
+					}
+				}
 				else{
 
-					displayFn(lifted);
+					gui.show(where, board[where]);
+
+					gui.hideSoon([where, faceupValuesArr[0]]);
 
 					faceupValuesArr.shift();
 
-					return 'no match! Try again';
+					console.log(board[where], ' no match! Try again');
 				}
 			}
-							
-			if(board.length === 0){
-				
-				if(endgameFn){
 
-					return endgameFn();
-				}
-				else{
-					return "No more pairs! You Won!";
-				}
+			else{
+
+				console.log('value undefined');
+
+				return false;
 			}
 		
 		};
 
+	function shuffle(array) {
+		  var m = array.length, t, i;
 
-	}
+		  // While there remain elements to shuffle…
+		  while (m) {
+
+		    // Pick a remaining element…
+		    i = Math.floor(Math.random() * m--);
+
+		    // And swap it with the current element.
+		    t = array[m];
+		   
+		    array[m] = array[i];
+		   
+		    array[i] = t;
+		  }
+		}
+
+		var gui = new GuiCtor(board.length, this.lift, this.reset);
+	
+	}	
+
+
+	
 
 	return Memory;
 })();
+
 
 
 

@@ -15,13 +15,14 @@ var MemoryCards = (function(){
 			--numPairs;
 		}
 		this.match = function(a,b) {
+			
 			return a.toUpperCase() == b.toUpperCase();
-		}
+		};
 		// this.display could remain undefined if MemoryGame allows it to be optional,
 		// but in case it's required, provide this identity function:
 		this.display = function(val) {
 			return val;
-		}
+		};
 
 	}
 	return MemoryCardset;

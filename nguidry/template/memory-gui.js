@@ -4,11 +4,6 @@ var MemoryGUI = (function () {
 
 		var memorygame = document.getElementById("memorygame");
 
-		function prepareForClicks(elem,clickFn) {
-			if (!elem) return;
-			elem.addEventListener("click", clickFn);
-		}
-
 		function makeTable(len) {
 			var table = document.createElement("table");
 			table.setAttribute("id","gameBoard");
@@ -34,42 +29,83 @@ var MemoryGUI = (function () {
 			return table;
 		}
 
+		function prepareForClicks(elem,clickFn) {
+			if (!elem) return;
+			elem.addEventListener("click", clickFn);
+		}
+
+		function findTile(where) {
+			var tile = document.getElementsByTagName("td");
+			return tile[where];
+		}
+
 		// public methods:
-		this.reset = function() {
-			var allTds = document.getElementsByTagName("td");
-			allTds.classList.remove("matched");
-			addTds.classList.remove("face-up");
-			addTds.classList.add("face-down");
+
+		this.reset = function() { 
+			//loop through the tiles
+			for(var where=0; where < len; ++where) {
+				//fetch the tile
+				var tile = findTile(where);
+				//remove any instances of the "matched" class
+				tile.classList.remove("matched");
+				//remove any instances of the "face-up" class
+				tile.classList.remove("face-up");
+				//add the "face-down" class to the tile
+				tile.classList.add("face-down"); 
+			}
 		};
 
 		this.show = function(where,what) {
-			//change the class from face-down to face-up
-			td[where].classList.remove("face-down");
-			td[where].classList.add("face-up");
+			//create a variable and fetch tile being shown based on position "where"
+			var tile = findTile(where); 
+			//set fetched tile's value to "what"
+			tile.setAttribute("value", what);
+			//remove "face-down" class from style of tile
+			tile.classList.remove("face-down");
+			//add "face-up" class to style of tile
+			tile.classList.add("face-up");
 		};
 
-		this.removeSoon = function(whereArr) {
-			//whereArr.classList.add("face-down");
+		this.removeSoon = function(whereArr) { 
+			window.setTimeout(function() {
+				for (var key in whereArr) {
+					var tile = findTile(key);
+					tile.classList.remove("face-up");
+					tile.classList.add("matched");
+				}
+			}, 500);
 		};
-
-		setTimeout(this.removeSoon, 500);
 		
-		this.hideSoon = function(whereArr) {
-			//whereArr.classList.add("matched");
+		this.hideSoon = function(whereArr) {  
+			window.setTimeout(function() {
+				for (var key in whereArr) {
+					var tile = findTile(key);
+					tile.classList.remove("face-up");
+					tile.classList.add("face-down");
+				}
+			}, 500);
 		};
-
-		setTimeout(this.hideSoon, 500);
 
 
 		var table = makeTable(len);
 		memorygame.appendChild(table);
 
-		var resetButton = document.createElement("button");
-		resetButton.id = "resetButton";
-		memorygame.appendChild(button);
+		makeResetButton(this.reset,resetGameFn);
+
 	}
+
+	function makeResetButton(resetGui,resetGame) {
+		var resetButton = document.createElement('button');
+		resetButton.innerHTML = 'Reset!';
+		resetButton.id = 'resetButton';
+		var grid = document.getElementById('memorygame');
+		grid.insertBefore(resetButton,grid.firstElementChild);
+		resetButton.addEventListener('click',function() {//when clicked, reset both modules
+			resetGui();
+			resetGame();
+		});
+	};
 
 	return GUI;
 })();
 
-console.log("lkadjfalskdf");

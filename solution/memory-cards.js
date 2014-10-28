@@ -1,10 +1,8 @@
-// You may use this cardset until you make your own
-
 var MemoryCards = (function(){
-	// produces pairs 'a'=='A','b'=='B',...
+
 	var alphabet = ' abcdefghijklmnopqrstuvwxyz';
 
-	function MemoryCardset(numPairs) {
+	function MemoryCardset(numPairs) { //card set ctor
 		if (numPairs < 1) numPairs = 1;
 		if (!numPairs || (numPairs > 26)) numPairs = 26;
 

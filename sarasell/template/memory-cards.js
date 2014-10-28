@@ -6,7 +6,7 @@ var MemoryCards = (function(){
 
 	function MemoryCardset(numPairs) {
 		if (numPairs < 1) numPairs = 1;
-		if (!numPairs || (numPairs > 26)) numPairs = 26;
+		if (!numPairs || (numPairs > alphabet.length)) numPairs = alphabet.length;
 
 		this.values = [];
 		while (numPairs) {

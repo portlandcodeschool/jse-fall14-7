@@ -1,4 +1,3 @@
-
 var game,cards; //global makes debugging easier
 function go() {
 	cards = new MemoryCards();
@@ -7,4 +6,3 @@ function go() {
 }
 
 window.addEventListener("load",go);
-

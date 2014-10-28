@@ -10,6 +10,12 @@
 	width: 100%;
 }
 
+/*#memorygame div.flip .front {
+    z-index: 900;
+    -webkit-transform: rotateY(180deg);
+    -moz-transform: rotateY(180deg);
+}
+*/
 #memorygame cell.facedown {
 	width: 80px;
 	height: 95px;
@@ -28,6 +34,19 @@
 	border-radius: 5px;
 }
 
-#memorygame cell.matched {
+#memorygame cell.missing {
 	visibility: hidden;
 }
+
+button {
+	clear:both;
+    border: 1px;
+    color: black;
+    font-size: 15px;
+    width: 60px;
+    margin: 10px;
+}
+button:hover {
+  color: #333;
+}
+

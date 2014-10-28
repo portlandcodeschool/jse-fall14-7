@@ -66,8 +66,6 @@ var MemoryGUI = (function () {
 
 		// public methods:
 
-		// ==== GUI Reset =====
-		// ====================
 		this.reset = function() {
 
 			$('.facedown').removeClass('faceup matched'); // removes unwanted classes from all cards

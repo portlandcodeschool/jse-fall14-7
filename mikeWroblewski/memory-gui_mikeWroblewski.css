@@ -2,13 +2,14 @@
 .clearfix{*zoom:1;}.clearfix:before,.clearfix:after{display:table;content:"";line-height:0;}.clearfix:after{clear:both;}
 
 /*
-=== html & body ===
+=== html, body, & p ===
 ===================
 */
 
 html {
-	background-color: #191919;
-	/*background-color:#292929;*/
+	background-color: #D1D1D1;
+	/*background-color:#292929;
+	191919*/
 	margin: 0 auto;
 }
 
@@ -44,8 +45,8 @@ p {
 }
 
 /*
-=== Game Board ===
-==================
+=== Game Board & Card States ===
+================================
 */
 
 #gametable {
@@ -57,6 +58,7 @@ p {
 	width:78px;
 	height:110px;
 	border-radius:5px;
+	box-shadow: 7px 7px 7px 0 rgba(0,0,0,20);
 	/*border:1.5px solid tan;*/
 	background:url(images/blackcardback.jpg);
 	background-size:contain;
@@ -86,7 +88,8 @@ p {
 
 #gametable div.matched {
 	/*background-color:#C49000;*/
-	background-color:black;
+	background-color:transparent;
+	box-shadow: none;
 }
 
 #gametable div.matched span {

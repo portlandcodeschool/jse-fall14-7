@@ -62,6 +62,7 @@ var MemoryGUI = (function () {
 
 		var topSpace = document.createElement('p');
 		$('body').prepend(topSpace);
+		$(topSpace).html("Memory Game");
 
 
 		// public methods:

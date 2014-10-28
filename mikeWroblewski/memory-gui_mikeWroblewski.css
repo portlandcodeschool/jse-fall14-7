@@ -7,19 +7,22 @@
 */
 
 html {
-	background-color: #D1D1D1;
-	/*background-color:#292929;
-	191919*/
+	background-color: #666666;
 	margin: 0 auto;
 }
 
 body {
-	width: 450px;
+	width: 510px;
 	margin: 0 auto;
 }
 
 p {
-	margin: 20px auto;
+	background-color: #696969;
+	margin: 15px auto;
+	text-align: center;
+	font-size: 40px;
+	font-family: Impact,Haettenschweiler,"Franklin Gothic Bold",Charcoal,"Helvetica Inserat","Bitstream Vera Sans Bold","Arial Black","sans serif";
+	box-shadow: 10px 10px 10px 0 rgba(0,0,0,20);
 }
 
 /*
@@ -42,6 +45,9 @@ p {
 	clear:both;
 	display:block;
 	margin: 0 auto;
+	box-shadow: 5px 5px 5px 0 rgba(0,0,0,20);
+	border: none;
+	background-color: #6F6F6F;
 }
 
 /*
@@ -58,13 +64,12 @@ p {
 	width:78px;
 	height:110px;
 	border-radius:5px;
-	box-shadow: 7px 7px 7px 0 rgba(0,0,0,20);
-	/*border:1.5px solid tan;*/
+	box-shadow: 10px 10px 10px 0 rgba(0,0,0,20);
 	background:url(images/blackcardback.jpg);
 	background-size:contain;
 	background-repeat:no-repeat;
 	float:left;
-	margin: 6px;
+	margin: 12px;
 	transition: background-color 1s ease,
 				text 1s ease,
 				text-shadow 1s ease;
@@ -81,13 +86,11 @@ p {
 	background:none;
 	text-align:center;
 	font-size: 28pt;
-	/*background:tan;*/
 	background: #8C8C8C;
 	text-shadow: 2px 2px #5E5E5E;
 }
 
 #gametable div.matched {
-	/*background-color:#C49000;*/
 	background-color:transparent;
 	box-shadow: none;
 }

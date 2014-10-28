@@ -1,7 +1,6 @@
 
 var game,cards; //global makes debugging easier
 function go() {
-	makeGrid(16);
 	console.log('Page Loaded!');
 	cards = new MemoryCards();
 	game  = new MemoryGame(MemoryGUI,cards);

@@ -4,23 +4,31 @@ var MemoryGUI = (function () {
 
 		var memorygame = document.getElementById("memorygame");
 
+
+		function prepareForClicks(elem,clickFn) {
+			if (!elem) return;
+			elem.addEventListener("click", clickFn);
+		}
+
+		function makeId(row,col) {
+			return "row" + row + "col" + col;
+		}
+
 		function makeTable(len) {
 			var table = document.createElement("table");
 			table.setAttribute("id","gameBoard");
+			
 
-			var td,
-          tr, 
-				side = Math.ceil(Math.sqrt(len));
+			var side = Math.ceil(Math.sqrt(len));
 
 			for (var row = 0; row<side; row++) {
-				tr = document.createElement("tr");
+				var tr = document.createElement("tr");
 				table.appendChild(tr);
 
 				for (var col = 0; col<side; col++) {
 
-					td = document.createElement("td");
-					td.id = "row"+row+"col"+col;
-					td.position = (row*side) + col;
+					var td = document.createElement("td");
+					td.id = makeId(row,col);
 					td.classList.add("face-down");
 
 					prepareForClicks(td,clickFn);
@@ -28,12 +36,7 @@ var MemoryGUI = (function () {
 				}
 			}
 			return table;
-		}
-
-		function prepareForClicks(elem,clickFn) {
-			if (!elem) return;
-			elem.addEventListener("click", clickFn);
-		}
+		}	
 
 		function findTile(where) {
 			var tile = document.getElementsByTagName("td");
@@ -88,24 +91,21 @@ var MemoryGUI = (function () {
 		};
 
 
-		var table = makeTable(len);
-		memorygame.appendChild(table);
-
 		function makeResetButton(resetGui,resetGame) {
 			var resetButton = document.createElement('button');
 			resetButton.innerHTML = 'Reset!';
 			resetButton.id = 'resetButton';
-			memorygame.insertBefore(resetButton,memorygame.firstElementChild);
+			memorygame.appendChild(resetButton);
 			resetButton.addEventListener('click',function() {//when clicked, reset both modules
 				resetGui();
 				resetGame();
 			});
+			return resetButton;
 		}
 
+		var table = makeTable(len);
+		memorygame.appendChild(table);
 		makeResetButton(this.reset,resetGameFn);
-
-		return table;
-
 	}
 
 	

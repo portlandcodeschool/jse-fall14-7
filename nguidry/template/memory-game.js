@@ -59,7 +59,6 @@ var MemoryGame = (function() {
 					removeAt(here);
 					removeAt(there);
 					//change to "matched" class in GUI
-					//incorporate slots.values[(currentGUI -> td.position)]
 					if (currentGUI) {
 						currentGUI.removeSoon([here, there]); 
 					}

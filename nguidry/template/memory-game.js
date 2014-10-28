@@ -4,22 +4,21 @@ var MemoryGame = (function() {
 	function MemoryGame(GuiCtor,cardset,matchFn,gameoverFn) {
 		var values = cardset.values,
 			matchFn = cardset.match, 
-			displayFn = cardset.display;		
-
-		var currentGUI = (GuiCtor)? new MemoryGUI(values.length,lift,reset): null; 
+			displayFn = cardset.display;
 
 		var slots, //sparse array: will have elements deleted as cards are removed
 			there; //position of face-up card if any, or false
 
+		var currentGUI = (GuiCtor)? new MemoryGUI(length,lift,reset): null; 
+
 		var reset = function() {  //public method
-			slots = cardset.slice(); //Uncaught TypeError: undefined is not a function 
+			slots = values.slice();  
 			length = values.length;
 			there = false;
 			shuffle(slots);
 		};
 
-		// reset now as part of init'ing 
-		reset(); //Uncaught TypeError: undefined is not a function
+		reset(); 
 
 		var faceupValue = function() {
 			return valueAt(there);

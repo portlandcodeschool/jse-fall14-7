@@ -1,32 +1,32 @@
 /* CSS for GUI...*/
 
-#memorygame .newrow {
+#memorygame {
 
 }
 
-#memorygame div.facedown {
-	float: left; /* is this correct? probably needs more */
-	width: 30px;
-	height: 30px;
-	border: 1px solid black;
-	background-color: #0000ee;
+#memorygame td.facedown {
+	float: center; /* is this correct? probably needs more */
+	width: 50px;
+	height: 50px;
+	border: 2px solid black;
+	background-color: #8F00B2;
 	margin: 5px;
 }
 
-#memorygame div.faceup {
+#memorygame td.faceup {
 	float: left; /* is this correct? probably needs more */
 	width: 30px;
 	height: 30px;
 	border: 1px solid black;
-	background-color: #000000;
+	background-color: #666666;
 	margin: 5px;
 }
 
-#memorygame div.matched {
+#memorygame td.matched {
 	float: left; /* is this correct? probably needs more */
 	width: 30px;
 	height: 30px;
 	border: 1px solid black;
-	background-color: #646464;
+	background-color: #3E3E3E;
 	margin: 5px;
 }

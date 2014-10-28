@@ -3,8 +3,7 @@ var MemoryGame = (function() {
 
 	function MemoryGame(GuiCtor,cardset,matchFn,gameoverFn) {
 		var values = cardset.values,
-			matchFn = cardset.match, 
-			displayFn = cardset.display;
+				displayFn = cardset.display;
 
 		var slots, //sparse array: will have elements deleted as cards are removed
 			there; //position of face-up card if any, or false
@@ -91,7 +90,6 @@ var MemoryGame = (function() {
 
 	// Private Functions shared by all boards:
 	//  (these could just as easily be placed inside ctor)
-	//PLACE IN CTOR AND CALL WITH RESET?
 	function shuffle(array) {
 	// Knuth-Fisher-Yates, modified from http://bost.ocks.org/mike/shuffle/
 		var end = array.length, temp, i;
@@ -108,4 +106,3 @@ var MemoryGame = (function() {
 
 	return MemoryGame;
 })();
-

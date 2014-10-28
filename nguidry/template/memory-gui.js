@@ -8,7 +8,8 @@ var MemoryGUI = (function () {
 			var table = document.createElement("table");
 			table.setAttribute("id","gameBoard");
 
-			var tr, 
+			var td,
+          tr, 
 				side = Math.ceil(Math.sqrt(len));
 
 			for (var row = 0; row<side; row++) {
@@ -90,22 +91,24 @@ var MemoryGUI = (function () {
 		var table = makeTable(len);
 		memorygame.appendChild(table);
 
+		function makeResetButton(resetGui,resetGame) {
+			var resetButton = document.createElement('button');
+			resetButton.innerHTML = 'Reset!';
+			resetButton.id = 'resetButton';
+			memorygame.insertBefore(resetButton,memorygame.firstElementChild);
+			resetButton.addEventListener('click',function() {//when clicked, reset both modules
+				resetGui();
+				resetGame();
+			});
+		}
+
 		makeResetButton(this.reset,resetGameFn);
+
+		return table;
 
 	}
 
-	function makeResetButton(resetGui,resetGame) {
-		var resetButton = document.createElement('button');
-		resetButton.innerHTML = 'Reset!';
-		resetButton.id = 'resetButton';
-		var grid = document.getElementById('memorygame');
-		grid.insertBefore(resetButton,grid.firstElementChild);
-		resetButton.addEventListener('click',function() {//when clicked, reset both modules
-			resetGui();
-			resetGame();
-		});
-	};
+	
 
 	return GUI;
 })();
-

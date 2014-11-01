@@ -2,9 +2,10 @@
 var game,cards; //global makes debugging easier
 
 function go() {
-	cards = new MemoryCards(8); //Pass digit into this. # of pairs. see memory-cards file
+	cards = new MemoryCards(10); //Pass digit into this. # of pairs. see memory-cards file
 	//need to define matchFn and gameoverFn
-	game  = new MemoryGame(MemoryGUI,cards);
+	game  = new MemoryGame(MemoryGUI,cards,this.lift);
 }
 
 window.addEventListener("load",go);
+//window.onload = go; 

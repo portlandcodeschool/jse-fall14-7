@@ -21,11 +21,11 @@ var MemoryGUI = (function () {
 
 			var side = Math.ceil(Math.sqrt(len));
 
-			for (var row = 0; row<side; row++) {
+			for (var row = 0; row < side; row++) {
 				var tr = document.createElement("tr");
 				table.appendChild(tr);
 
-				for (var col = 0; col<side; col++) {
+				for (var col = 0; col < side; col++) {
 
 					var td = document.createElement("td");
 					td.id = makeId(row,col);
@@ -41,6 +41,18 @@ var MemoryGUI = (function () {
 		function findTile(where) {
 			var tile = document.getElementsByTagName("td");
 			return tile[where];
+		}
+
+		function makeResetButton(resetGui,resetGame) {
+			var resetButton = document.createElement('button');
+			resetButton.innerHTML = 'Reset!';
+			resetButton.id = 'resetButton';
+			memorygame.appendChild(resetButton);
+			resetButton.addEventListener('click',function() {//when clicked, reset both modules
+				resetGui();
+				resetGame();
+			});
+			return resetButton;
 		}
 
 		// public methods:
@@ -90,20 +102,7 @@ var MemoryGUI = (function () {
 			}, 500);
 		};
 
-
-		function makeResetButton(resetGui,resetGame) {
-			var resetButton = document.createElement('button');
-			resetButton.innerHTML = 'Reset!';
-			resetButton.id = 'resetButton';
-			memorygame.appendChild(resetButton);
-			resetButton.addEventListener('click',function() {//when clicked, reset both modules
-				resetGui();
-				resetGame();
-			});
-			return resetButton;
-		}
-
-		var table = makeTable(len);
+		var table = makeTable(cards.values.length); //need to figure out how to pass length into this
 		memorygame.appendChild(table);
 		makeResetButton(this.reset,resetGameFn);
 	}
@@ -112,3 +111,4 @@ var MemoryGUI = (function () {
 
 	return GUI;
 })();
+

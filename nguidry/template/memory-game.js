@@ -3,12 +3,10 @@ var MemoryGame = (function() {
 
 	function MemoryGame(GuiCtor,cardset,matchFn,gameoverFn) {
 		var values = cardset.values,
-				displayFn = cardset.display;
-
-		var slots, //sparse array: will have elements deleted as cards are removed
-			there; //position of face-up card if any, or false
-
-		var currentGUI = (GuiCtor)? new MemoryGUI(length,lift,reset): null; 
+			displayFn = cardset.display,
+			slots, 
+			there; 
+ 
 
 		var reset = function() {  //public method
 			slots = values.slice();  
@@ -16,6 +14,8 @@ var MemoryGame = (function() {
 			there = false;
 			shuffle(slots);
 		};
+
+		var currentGUI = (GuiCtor)? new MemoryGUI(length,lift,reset): null;
 
 		reset(); 
 

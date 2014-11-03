@@ -2,7 +2,8 @@
 
 var MemoryCards = (function(){
 	// produces pairs 'a'=='A','b'=='B',...
-	var alphabet = ' abcdefghijklmnopqrstuvwxyz';
+	//keep or discard space before?
+	var alphabet = 'abcdefghijklmnopqrstuvwxyz';
 
 	function MemoryCardset(numPairs) {
 		if (numPairs < 1) numPairs = 1;

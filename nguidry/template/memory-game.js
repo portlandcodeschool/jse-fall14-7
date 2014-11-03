@@ -2,10 +2,12 @@ var MemoryGame = (function() {
 
 
 	function MemoryGame(GuiCtor,cardset,matchFn,gameoverFn) {
-		var values = cardset.values,
-			displayFn = cardset.display,
-			slots, 
-			there; 
+		var values = cardset.values;
+		//var matchFn = cardset.match;
+		var displayFn = cardset.display;
+		var slots;
+		var length;
+		var there; 
  
 
 		var reset = function() {  //public method
@@ -42,30 +44,28 @@ var MemoryGame = (function() {
 				gameOverFn();
 		};
 
-		var lift = function(here) {
-			if (!remainsAt(here)) return false;
-			if (there===here) return false;
+		function lift(here) {
+			//for testing only
+			console.log("lift function working");
+			if (!remainsAt(here)) {return false;}
+			if (there===here) {return false;}
 
-			// must be a face-down card here; proceed...
 			var valHere = valueAt(here);
 			if (there === false) {
 				// no current face-up
-				there = here; //turn here face-up
-				//show card in gui
+				there = here;
 			} else {
-				// check match with face-up
+				// must match face-up
 				if (matchFn(valHere,valueAt(there))) {
-					// match; remove both:
 					removeAt(here);
 					removeAt(there);
-					//change to "matched" class in GUI
 					if (currentGUI) {
-						currentGUI.removeSoon([here, there]); 
+						currentGUI.removeSoon([here,there]);
 					}
 					checkGameover();
 				} else {
 					if (currentGUI) {
-						currentGUI.hideSoon([here, there]);
+						currentGUI.hideSoon([here,there]);
 					}
 				}
 				there = false;
@@ -74,10 +74,10 @@ var MemoryGame = (function() {
 				valHere = displayFn(valHere);
 			}
 			if (currentGUI) {
-				currentGUI.show(here, valHere);
+				currentGUI.show(here,valHere);
 			}
 			return valHere;
-		};
+		}
 
 		// Make some methods public:
 		this.reset = reset;

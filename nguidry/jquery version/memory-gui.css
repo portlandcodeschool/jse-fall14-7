@@ -1,25 +1,25 @@
 /* CSS for GUI...*/
 
-#gameBoard {
-	/* ... */
+/*eventually reevaluate and add more specificity to each set of rules*/
+
+#gameboard {
+	/* will need to change - these were for a table*/
 	empty-cells: show;
 	border-spacing: 0;
 	background: black;
 	margin: auto;
 }
 
-#gameBoard td {
-	width: 100px;
-	height: 100px;
-	border: 4px solid white;
-}
-
-#resetButton {
+#resetbutton {
 	/* button styling here */
 }
 
 .face-down {
 	background: red;
+}
+
+.face-up:before {
+	content:attr(value);
 }
 
 .face-up {

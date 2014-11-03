@@ -4,43 +4,33 @@ var MemoryGUI = (function () {
 
 		var memorygame = document.getElementById("memorygame");
 
-
-		function prepareForClicks(elem,clickFn) {
-			if (!elem) return;
-			elem.addEventListener("click", clickFn);
+		function makeID(where) {
+			return "card" + where;
 		}
 
-		function makeId(row,col) {
-			return "row" + row + "col" + col;
-		}
+		function makeBoard(len) {
+	      //create a div to be the game board with an id of gameboard
+	      var gameboard = document.createElement("div");
+	      gameboard.setAttribute("id", "gameboard");
+	      //memorygame.appendChild(gameboard);  needed here, or after board is generated?
 
-		function makeTable(len) {
-			var table = document.createElement("table");
-			table.setAttribute("id","gameBoard");
-			
+	      //determine length of side of game board based on length of card deck array
+	      var side = Math.ceil(Math.sqrt(len));
 
-			var side = Math.ceil(Math.sqrt(len));
+	      //loop to create a card in GUI for each card in deck
+	      for (var where=0; where < len; where++) {
+	        //create a card
+	        var card = document.createElement("div");
+	        card.classList.add("face-down");
+	        card.id = makeID(where);
+	        card.addEventListener('click', function(){clickFn(where);});
+	        gameboard.appendChild(card);
+	      }
+	      return gameboard;
+	    }	
 
-			for (var row = 0; row < side; row++) {
-				var tr = document.createElement("tr");
-				table.appendChild(tr);
-
-				for (var col = 0; col < side; col++) {
-
-					var td = document.createElement("td");
-					td.id = makeId(row,col);
-					td.classList.add("face-down");
-
-					prepareForClicks(td,clickFn);
-					tr.appendChild(td);
-				}
-			}
-			return table;
-		}	
-
-		function findTile(where) {
-			var tile = document.getElementsByTagName("td");
-			return tile[where];
+		function findCard(where) {
+			return document.getElementById(makeID(where));
 		}
 
 		function makeResetButton(resetGui,resetGame) {
@@ -58,36 +48,37 @@ var MemoryGUI = (function () {
 		// public methods:
 
 		this.reset = function() { 
-			//loop through the tiles
+			//loop through the card
 			for(var where=0; where < len; ++where) {
-				//fetch the tile
-				var tile = findTile(where);
+				//fetch the card
+				var card = findCard(where);
 				//remove any instances of the "matched" class
-				tile.classList.remove("matched");
+				card.classList.remove("matched");
 				//remove any instances of the "face-up" class
-				tile.classList.remove("face-up");
-				//add the "face-down" class to the tile
-				tile.classList.add("face-down"); 
+				card.classList.remove("face-up");
+				//add the "face-down" class to the card
+				card.classList.add("face-down"); 
 			}
 		};
 
 		this.show = function(where,what) {
-			//create a variable and fetch tile being shown based on position "where"
-			var tile = findTile(where); 
-			//set fetched tile's value to "what"
-			tile.setAttribute("value", what);
-			//remove "face-down" class from style of tile
-			tile.classList.remove("face-down");
-			//add "face-up" class to style of tile
-			tile.classList.add("face-up");
+			//create a variable and fetch card being shown based on position "where"
+			console.log("show function working");
+			var card = findCard(where); 
+			//set fetched card's value to "what"
+			card.setAttribute("value", what);
+			//remove "face-down" class from style of card
+			card.classList.remove("face-down");
+			//add "face-up" class to style of card
+			card.classList.add("face-up");
 		};
 
 		this.removeSoon = function(whereArr) { 
 			window.setTimeout(function() {
 				for (var key in whereArr) {
-					var tile = findTile(key);
-					tile.classList.remove("face-up");
-					tile.classList.add("matched");
+					var card = findCard(key);
+					card.classList.remove("face-up");
+					card.classList.add("matched");
 				}
 			}, 500);
 		};
@@ -95,15 +86,15 @@ var MemoryGUI = (function () {
 		this.hideSoon = function(whereArr) {  
 			window.setTimeout(function() {
 				for (var key in whereArr) {
-					var tile = findTile(key);
-					tile.classList.remove("face-up");
-					tile.classList.add("face-down");
+					var card = findCard(key);
+					card.classList.remove("face-up");
+					card.classList.add("face-down");
 				}
 			}, 500);
 		};
 
-		var table = makeTable(cards.values.length); //need to figure out how to pass length into this
-		memorygame.appendChild(table);
+		var board = makeBoard(cards.values.length); //need to figure out how to pass length into this
+		memorygame.appendChild(board);
 		makeResetButton(this.reset,resetGameFn);
 	}
 

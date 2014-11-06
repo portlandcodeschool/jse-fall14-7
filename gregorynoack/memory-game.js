@@ -27,7 +27,7 @@ var MemoryGame = (function() {
 		reset();// reset now as part of init'ing	
 
 
-var gui = new GuiCtor(length,lift,reset);
+		var gui = new GuiCtor(length,lift,reset);
 	
 
 
